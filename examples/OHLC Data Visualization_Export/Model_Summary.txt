@@ -1,0 +1,5 @@
+MODEL SUMMARY
+Worksheets: 2
+Formula Cells: 1
+Charts: 1
+VBA Components: 4

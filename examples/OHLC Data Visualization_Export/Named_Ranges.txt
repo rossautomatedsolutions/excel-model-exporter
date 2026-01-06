@@ -1,0 +1,33 @@
+=== NAMED RANGES ===
+Workbook: OHLC Data Visualization.xlsm
+
+_xlfn.ANCHORARRAY = =#NAME?
+_xlfn.STOCKHISTORY = =#NAME?
+_xlpm.atm = =#NAME?
+_xlpm.atmIV = =#NAME?
+_xlpm.avg = =#NAME?
+_xlpm.back = =#NAME?
+_xlpm.d = =#NAME?
+_xlpm.dist = =#NAME?
+_xlpm.dte = =#NAME?
+_xlpm.dteCol = =#NAME?
+_xlpm.exp = =#NAME?
+_xlpm.front = =#NAME?
+_xlpm.iv = =#NAME?
+_xlpm.ivs = =#NAME?
+_xlpm.minDist = =#NAME?
+_xlpm.mon = =#NAME?
+_xlpm.monCol = =#NAME?
+_xlpm.P = =#NAME?
+_xlpm.pct = =#NAME?
+_xlpm.pcts = =#NAME?
+_xlpm.px = =#NAME?
+_xlpm.ranks = =#NAME?
+_xlpm.slope = =#NAME?
+_xlpm.spot = =#NAME?
+_xlpm.strikes = =#NAME?
+_xlpm.vegas = =#NAME?
+IVTerm_ATM = ='https://d.docs.live.net/f9e90892a384ee1d/Mini PC/Templates/[Implied Volatility Analysis.xlsm]IV Term Structure'!$C$2#
+IVTerm_Avg = ='https://d.docs.live.net/f9e90892a384ee1d/Mini PC/Templates/[Implied Volatility Analysis.xlsm]IV Term Structure'!$F$2#
+IVTerm_Days = ='https://d.docs.live.net/f9e90892a384ee1d/Mini PC/Templates/[Implied Volatility Analysis.xlsm]IV Term Structure'!$B$2#
+IVTerm_VegaW = ='https://d.docs.live.net/f9e90892a384ee1d/Mini PC/Templates/[Implied Volatility Analysis.xlsm]IV Term Structure'!$G$2#

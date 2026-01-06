@@ -1,0 +1,97 @@
+' VBA COMPONENT: mod_OHLC_Chart_Update
+' Type: 1
+
+Option Explicit
+
+Public Sub Update_OHLC_Chart()
+
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Worksheets("Main")
+
+    Dim chartName As String
+    chartName = "CloseChart"
+
+    Dim chtObj As ChartObject
+    On Error Resume Next
+    Set chtObj = ws.ChartObjects(chartName)
+    On Error GoTo 0
+
+    If chtObj Is Nothing Then
+        MsgBox "Chart '" & chartName & "' not found.", vbCritical
+        Exit Sub
+    End If
+
+    '---------------------------------------
+    ' Detect dynamic STOCKHISTORY range
+    '---------------------------------------
+    Dim lastRow As Long
+    lastRow = ws.Cells(ws.Rows.Count, "A").End(xlUp).Row
+
+    If lastRow < 15 Then
+        MsgBox "No data returned from STOCKHISTORY.", vbExclamation
+        Exit Sub
+    End If
+
+    Dim xRange As Range
+    Dim yRange As Range
+
+    Set xRange = ws.Range("A14:A" & lastRow)   ' Date
+    Set yRange = ws.Range("B14:B" & lastRow)   ' Close
+
+    '---------------------------------------
+    ' Update chart
+    '---------------------------------------
+    With chtObj.Chart
+
+        ' Ensure single series
+        Do While .SeriesCollection.Count > 1
+            .SeriesCollection(2).Delete
+        Loop
+
+        If .SeriesCollection.Count = 0 Then
+            .SeriesCollection.NewSeries
+        End If
+
+        With .SeriesCollection(1)
+            .XValues = xRange
+            .Values = yRange
+            .Name = ws.Range("B6").Value
+        End With
+
+        ' Titles / legend
+        .HasLegend = False
+        .HasTitle = True
+        .ChartTitle.Text = ws.Range("B6").Value & " – Close"
+
+        '---------------------------------------
+        ' HARD AXIS RESET (THIS IS THE FIX)
+        '---------------------------------------
+        On Error Resume Next
+
+        With .Axes(xlCategory)
+
+            ' Step 1: Force category mode (flush state)
+            .CategoryType = xlCategoryScale
+
+            ' Step 2: Force time scale again
+            .CategoryType = xlTimeScale
+
+            ' Step 3: Let Excel fully auto-resolve spacing
+            .BaseUnitIsAuto = True
+            .MajorUnitIsAuto = True
+            .MinorUnitIsAuto = True
+
+            .HasTitle = False
+
+        End With
+
+        With .Axes(xlValue)
+            .HasTitle = False
+        End With
+
+        On Error GoTo 0
+
+    End With
+
+End Sub
+

@@ -1,0 +1,4 @@
+Chart: CloseChart
+Type: 4
+  Series: MSFT
+
